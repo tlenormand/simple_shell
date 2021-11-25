@@ -2,20 +2,20 @@
 
 /**
  * main - prints "$ ", wait for the user, prints it on the next line
- * @ac: number of arguments
- * @av: arguments
- * Return: number of xharactere read
+ * Return: number of characteres read
  */
 
 int main(void)
 {
 	size_t len = 0;
 	char *line = NULL;
+	char *argv;
 
 	printf("$ ");
 	while ((getline(&line, &len, stdin)) != -1)
 	{
-		get_strtok(line);
+		argv = get_strtok(line);
+		printf("%s", argv);
 		printf("$ ");
 	}
 

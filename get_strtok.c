@@ -6,15 +6,14 @@
  * Return: Always 0.
  */
 
-int get_strtok(void)
+int get_strtok(char *str)
 {
-	char str[] = "bla bli blo";
 	const char *delimiters = " ";
 	char *strToken = strtok ( str, delimiters);
 
 	while (strToken != NULL )
 	{
-		printf ("%s\n", strToken);
+		printf ("%s", strToken);
 		strToken = strtok (NULL, delimiters);
 	}
 

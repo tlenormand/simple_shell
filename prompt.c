@@ -9,13 +9,13 @@ int main(void)
 {
 	size_t len = 0;
 	char *line = NULL;
-	char *argv;
+	char **argv;
 
 	printf("$ ");
 	while ((getline(&line, &len, stdin)) != -1)
 	{
 		argv = get_strtok(line);
-		printf("%s", argv);
+		printf("%s", line);
 		printf("$ ");
 	}
 

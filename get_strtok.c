@@ -6,15 +6,21 @@
  * Return: Always 0.
  */
 
-char *get_strtok(char *str)
+char **get_strtok(char *str)
 {
 	const char *delimiters = " ";
 	char *strToken = strtok ( str, delimiters);
+	char **argv = NULL;
+	int i = 0;
 
-	while (strToken != NULL )
+	argv[i] = strToken;
+	i++;
+	while (strToken != NULL)
 	{
 		strToken = strtok (NULL, delimiters);
+		argv[i] = strToken;
+		i++;
 	}
 
-	return (strToken);
+	return (argv);
 }

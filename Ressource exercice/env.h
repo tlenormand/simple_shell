@@ -33,5 +33,6 @@ int _setenv(const char *name, const char *value, int overwrite);
 int _unsetenv(const char *name);
 int print_list(const directory_t *h);
 void free_list(directory_t *head);
+char **cpy_env(char **environ);
 
 #endif /* ENV_H */

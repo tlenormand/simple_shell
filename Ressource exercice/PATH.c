@@ -50,6 +50,10 @@ int main(void)
 {
 	/* compare our _getenv, _setenv and _unsetenv to real function */
 
+	int i;
+
+	cpy_env(environ);
+
 	printf("\n\n-----VARIABLE NON PRESENTE-----\n");
 	printf("_getenv HELLO : %s\n", _getenv("HELLO"));
 	printf(" getenv HELLO : %s\n", getenv("HELLO"));
@@ -84,8 +88,22 @@ int main(void)
 	printf(" setenv RUOJNOB : %d\n", setenv("RUOJNOB", "ruojnob", 1));
 	printf("_getenv BONJOUR : %s\n", _getenv("BONJOUR"));
 	printf(" getenv RUOJNOB : %s\n", getenv("RUOJNOB"));
+	i = 0;
+    while (environ[i] != NULL)
+    {
+        printf("%s\n", environ[i]);
+        i++;
+    }
+	printf("\n\n\n");
 	printf("_unsetenv BONJOUR : %d\n", _unsetenv("BONJOUR"));
 	printf(" unsetenv RUOJNOB : %d\n", unsetenv("RUOJNOB"));
+	i = 0;
+    while (environ[i] != NULL)
+    {
+        printf("%s\n", environ[i]);
+        i++;
+    }
+	printf("\n\n\n");
 	printf("_getenv BONJOUR : %s\n", _getenv("BONJOUR"));
 	printf(" getenv RUOJNOB : %s\n", getenv("RUOJNOB"));
 
@@ -148,6 +166,8 @@ int main(void)
 	printf(" unsetenv '=' VALUE : %d\n", unsetenv("321"));
 	printf("_getenv '=' VALUE : %s\n", _getenv("123"));
 	printf(" getenv '=' VALUE : %s\n", getenv("321"));
+
+	printf("_setenv '=' VALUE : %d\n", _setenv("123", "123", 1));
 
 	printf("\n\nDONE\n");
 	return(0);
@@ -253,6 +273,16 @@ void free_list(directory_t *head)
 int _setenv(const char *name, const char *value, int overwrite)
 {
 	char *new_env = NULL;
+	int i;
+
+	if (name == NULL || *name == '\0')
+		return (-1);
+
+	for (i = 0; name[i]; i++)
+	{
+		if (name[i] == '=')
+			return (-1);
+	}
 
 	if (overwrite != 0 || _getenv(name) == NULL)
 	{
@@ -266,15 +296,15 @@ int _setenv(const char *name, const char *value, int overwrite)
 		/* add to new_env : name=value */
 		new_env = strcat(strcat(strcpy(new_env, name), "="), value);
 		_unsetenv(name);
-		if (putenv(new_env) != 0)
+		if (putenv(new_env) == 0)
 		{
-			return 0;
+			return (0);
 		}
 		else
 		{
-			return -1;
+			return (-1);
 		}
-		return (0);
+		return (-1);
 	}
 	else if (overwrite == 0)
 	{
@@ -287,20 +317,71 @@ int _setenv(const char *name, const char *value, int overwrite)
 
 int _unsetenv(const char *name)
 {
-	char *old_env;
+	int i = 0;
+	int k = 0, j = 0;
 
-	if (name == NULL)
+	if (name == NULL || *name == '\0')
 		return (-1);
 
-	old_env = (_getenv(name));
-	printf("old env : %s\n", old_env);
-	printf("_getenv : %s\n", _getenv(name));
-	free(old_env);
-	printf("old env : %s\n", old_env);
-	printf("_getenv : %s\n", _getenv(name));
 
-	if (!old_env)
+	while (environ[i])
+	{
+		while (name[k])
+		{
+			/* if name not found */
+			if (!(environ[i]))
+			{
+				return(-1);
+			}
+
+			/* search for correspondance between environ and name */
+			if (environ[i][j] == name[k])
+				j++, k++;
+			else
+				j = 0, k = 0, i++;
+		}
+
+		/* if environ == '=' then name find in environ[i][j] */
+		if (environ[i][j] == '=')
+		{
+			environ[i] = NULL;
+			break;
+		}
+		j = 0;
+		k = 0;
+		i++;
+	}
+
+
+	if (!environ[i])
 		return (0);
 
 	return (-1);
+}
+
+
+
+char **cpy_env(char **environ)
+{
+	int i;
+	char **environ_cpy = NULL;
+
+	environ_cpy = malloc(sizeof(environ));
+	if (environ_cpy == NULL)
+	{
+		return (NULL);
+	}
+
+	for (i = 0; environ[i]; i++)
+	{
+		environ_cpy[i] = malloc(sizeof(char) * strlen(environ[i]));
+		if (environ_cpy[i] == NULL)
+		{
+			free(environ_cpy);
+			return (NULL);
+		}
+		environ_cpy[i] = strcpy(environ_cpy[i], environ[i]);
+	}
+
+	return(environ_cpy);
 }

@@ -27,7 +27,7 @@ char **strtow(char *str)
 	{
 		if (str[i] != ' ')
 		{
-			list[row] = (char *)malloc((2 + nb_letter(i, str) * sizeof(char)));
+			list[row] = (char *)malloc((nb_letter(i, str) * sizeof(char)));
 			if (list[row] == NULL)
 			{
 				for (idx = 0; idx <= row; idx++)

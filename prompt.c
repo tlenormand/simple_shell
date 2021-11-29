@@ -45,6 +45,7 @@ int fork_main(char *line)
 
 	if (child_pid == 0)
 	{
+		/* child process */
 		argv = strtow(line);
 		if (argv != NULL)
 		{
@@ -57,4 +58,18 @@ int fork_main(char *line)
 	}
 
 	return (0);
+}
+
+/**
+ * exe_func - function that execute a command
+ * @argv: argument income
+ * Return: nothing if success, -1 on error
+ */
+
+int exe_func(char **argv)
+{
+	if (execve(argv[0], argv, NULL) == -1)
+		perror("Error: execve()");
+
+	return (-1);
 }

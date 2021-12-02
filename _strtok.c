@@ -1,12 +1,12 @@
 #include "main.h"
 
 /**
- * strtow - function that splits a string into words
+ * _strtok - function that splits a string into words
  * @str: string
  * Return: array of string
  */
 
-char **strtow(char *str)
+char **_strtok(char *str)
 {
 	char **argv = NULL;
 	int i = 0, idx = 0, lenght = 0, row = 0;

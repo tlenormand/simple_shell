@@ -1,58 +1,11 @@
-#include "env.h"
+#include "main.h"
 
-/*int main(void)
-{
-	const char *name = "PATH";
-	const char *value = _getenv(name);
-	char *path;
-	int i = 0, j = 0;
-	directory_t *head;
-
-	head = NULL;
-
-	path = malloc(sizeof(char) * strlen(value));
-	if (path == NULL)
-	{
-		printf("Error: malloc()");
-		return (-1);
-	}
-
-	while (value[i] != '\0')
-	{
-		path[j] = value[i];
-		i++;
-		j++;
-		if (value[i + 1] == '\0')
-			path[j] = value[i];
-		if (value[i] == ':' || value[i + 1] == '\0')
-		{
-			head = add_node_end(&head, name, path);
-			free(path);
-			path = malloc(sizeof(char) * strlen(value));
-			if (path == NULL)
-			{
-				printf("Error: malloc()");
-				return (-1);
-			}
-			j = 0;
-			i++;
-		}
-	}
-
-	free(path);
-	print_list(head);
-	free_list(head);
-	return (0);
-}*/
-
+/* test the env */
 
 int main(void)
 {
-	/* compare our _getenv, _setenv and _unsetenv to real function */
-
-	int i;
-
-	cpy_env(environ);
+	env_cpy = _double_pointer_copy(env_cpy, environ);
+	_printenv(env_cpy);
 
 	printf("\n\n-----VARIABLE NON PRESENTE-----\n");
 	printf("_getenv HELLO : %s\n", _getenv("HELLO"));
@@ -88,22 +41,8 @@ int main(void)
 	printf(" setenv RUOJNOB : %d\n", setenv("RUOJNOB", "ruojnob", 1));
 	printf("_getenv BONJOUR : %s\n", _getenv("BONJOUR"));
 	printf(" getenv RUOJNOB : %s\n", getenv("RUOJNOB"));
-	i = 0;
-    while (environ[i] != NULL)
-    {
-        printf("%s\n", environ[i]);
-        i++;
-    }
-	printf("\n\n\n");
 	printf("_unsetenv BONJOUR : %d\n", _unsetenv("BONJOUR"));
 	printf(" unsetenv RUOJNOB : %d\n", unsetenv("RUOJNOB"));
-	i = 0;
-    while (environ[i] != NULL)
-    {
-        printf("%s\n", environ[i]);
-        i++;
-    }
-	printf("\n\n\n");
 	printf("_getenv BONJOUR : %s\n", _getenv("BONJOUR"));
 	printf(" getenv RUOJNOB : %s\n", getenv("RUOJNOB"));
 
@@ -167,221 +106,69 @@ int main(void)
 	printf("_getenv '=' VALUE : %s\n", _getenv("123"));
 	printf(" getenv '=' VALUE : %s\n", getenv("321"));
 
-	printf("_setenv '=' VALUE : %d\n", _setenv("123", "123", 1));
+	printf("\n\n-----SETENV NEW VARIABLE WITH LOWERCASE, OVERWRITE = 1-----\n");
+	printf("_setenv BONjOUR : %d\n", _setenv("BONjOUR", "bonjour", 1));
+	printf(" setenv RUOjNOB : %d\n", setenv("RUOjNOB", "ruojnob", 1));
+	printf("_getenv BONjOUR : %s\n", _getenv("BONjOUR"));
+	printf(" getenv RUOjNOB : %s\n", getenv("RUOjNOB"));
+	printf("_unsetenv BONjOUR : %d\n", _unsetenv("BONjOUR"));
+	printf(" unsetenv RUOjNOB : %d\n", unsetenv("RUOjNOB"));
+	printf("_getenv BONjOUR : %s\n", _getenv("BONjOUR"));
+	printf(" getenv RUOjNOB : %s\n", getenv("RUOjNOB"));
+
+	_free_double_pointer(env_cpy);
 
 	printf("\n\nDONE\n");
-	return(0);
+	return (0);
 }
 
+/* test the linked listh path */
 
-int print_list(const directory_t *h)
+int main(void)
 {
-	int number_of_nodes = 0;
+	env_cpy = _double_pointer_copy(env_cpy, environ);
+	_printenv(env_cpy);
 
-	while (h != NULL)
+	const char *name = "PATH";
+	const char *value = _getenv(name);
+	char *path;
+	int i = 0, j = 0;
+	directory_t *head;
+
+		head = NULL;
+
+	path = malloc(sizeof(char) * strlen(value));
+	if (path == NULL)
 	{
-		if (h->value == NULL)
-		{
-			printf("[%d] (nil)\n", 0);
-		}
-		else
-		{
-			printf("[%d] name : %s, value : %s\n", number_of_nodes, h->name, h->value);
-		}
-		number_of_nodes++;
-		h = h->next;
-	}
-
-	return (number_of_nodes);
-}
-
-/**
- * add_node - function that adds a new node at the beginning of a list_t list
- * @head: address of the first node
- * @str: new string to add in the list
- * Return: xxx
- */
-
-directory_t *add_node(directory_t **head, const char *name, const char *value)
-{
-	directory_t *new = NULL;
-
-	new = malloc(sizeof(directory_t));
-	if (new == NULL)
-	{
-		return (NULL);
-	}
-
-	new->name = strdup(name);
-	new->value = strdup(value);
-	new->next = *head;
-	*head = new;
-
-	return (*head);
-}
-
-/**
- * add_node_end - function that adds a new node at the end of a list_t list
- * @head: address of node
- * @str: new string to add in the list
- * Return: new_list
- */
-
-directory_t *add_node_end(directory_t **head, const char *name, const char *value)
-{
-	directory_t *new_list, *old_list;
-
-	new_list = malloc(sizeof(directory_t));
-	if (new_list == NULL)
-		return (NULL);
-
-	new_list->name = strdup(name);
-	new_list->value = strdup(value);
-
-	if (*head == NULL)
-		*head = new_list;
-	else
-	{
-		old_list = *head;
-		while (old_list->next != NULL)
-			old_list = old_list->next;
-		old_list->next = new_list;
-	}
-
-	return (*head);
-}
-
-/**
- * free_list - function that frees a list_t list
- * @head: address of node
- */
-
-void free_list(directory_t *head)
-{
-	directory_t *tmp;
-
-	while (head != NULL)
-	{
-		tmp = head;
-		head = head->next;
-		free(tmp->name);
-		free(tmp->value);
-		free(tmp);
-	}
-}
-
-int _setenv(const char *name, const char *value, int overwrite)
-{
-	char *new_env = NULL;
-	int i;
-
-	if (name == NULL || *name == '\0')
-		return (-1);
-
-	for (i = 0; name[i]; i++)
-	{
-		if (name[i] == '=')
-			return (-1);
-	}
-
-	if (overwrite != 0 || _getenv(name) == NULL)
-	{
-		/* new variable | +2 for '\0' and '=' */
-		new_env = malloc(sizeof(char) * (strlen(name) + strlen(value) + 1));
-		if (new_env == NULL)
-		{
-			printf("Error: malloc()\n");
-			return(-1);
-		}
-		/* add to new_env : name=value */
-		new_env = strcat(strcat(strcpy(new_env, name), "="), value);
-		_unsetenv(name);
-		if (putenv(new_env) == 0)
-		{
-			return (0);
-		}
-		else
-		{
-			return (-1);
-		}
+		printf("Error: malloc()");
 		return (-1);
 	}
-	else if (overwrite == 0)
+
+	while (value[i] != '\0')
 	{
-		/* nothing to do, success return */
-		return (0);
-	}
-	return (-1);
-}
-
-
-int _unsetenv(const char *name)
-{
-	int i = 0;
-	int k = 0, j = 0;
-
-	if (name == NULL || *name == '\0')
-		return (-1);
-
-
-	while (environ[i])
-	{
-		while (name[k])
-		{
-			/* if name not found */
-			if (!(environ[i]))
-			{
-				return(-1);
-			}
-
-			/* search for correspondance between environ and name */
-			if (environ[i][j] == name[k])
-				j++, k++;
-			else
-				j = 0, k = 0, i++;
-		}
-
-		/* if environ == '=' then name find in environ[i][j] */
-		if (environ[i][j] == '=')
-		{
-			environ[i] = NULL;
-			break;
-		}
-		j = 0;
-		k = 0;
+		path[j] = value[i];
 		i++;
-	}
-
-
-	if (!environ[i])
-		return (0);
-
-	return (-1);
-}
-
-
-
-char **cpy_env(char **environ)
-{
-	int i;
-	char **environ_cpy = NULL;
-
-	environ_cpy = malloc(sizeof(environ));
-	if (environ_cpy == NULL)
-	{
-		return (NULL);
-	}
-
-	for (i = 0; environ[i]; i++)
-	{
-		environ_cpy[i] = malloc(sizeof(char) * strlen(environ[i]));
-		if (environ_cpy[i] == NULL)
+		j++;
+		if (value[i + 1] == '\0')
+			path[j] = value[i];
+		if (value[i] == ':' || value[i + 1] == '\0')
 		{
-			free(environ_cpy);
-			return (NULL);
+			head = add_node_end(&head, name, path);
+			free(path);
+			path = malloc(sizeof(char) * strlen(value));
+			if (path == NULL)
+			{
+				printf("Error: malloc()");
+				return (-1);
+			}
+			j = 0;
+			i++;
 		}
-		environ_cpy[i] = strcpy(environ_cpy[i], environ[i]);
 	}
 
-	return(environ_cpy);
+	free(path);
+	print_list(head);
+	free_list(head);
+	_free_double_pointer(env_cpy);
+	return (0);
 }

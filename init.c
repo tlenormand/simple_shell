@@ -34,10 +34,11 @@ void _close(char *line)
 
 directory_t *_init_linked_list_path(const char *name)
 {
-	const char *value = _getenv(name);
+	char *value = malloc(sizeof(char) * (strlen(_getenv(name)) + 1));
 	char *path = NULL;
 	int i = 0, j = 0;
 
+	value = strcat(strcpy(value, _getenv(name)), "\0");
 	/*value = malloc(sizeof(char) * (strlen(_getenv(name)) + 1))*/
 
 	path = malloc(sizeof(char) * (strlen(value) + 1));
@@ -47,14 +48,12 @@ directory_t *_init_linked_list_path(const char *name)
 		return (NULL);
 	}
 
-	while (value[i] != '\0')
+	while (value[i])
 	{
 		path[j] = value[i];
 		i++;
 		j++;
-		if (value[i + 1] == '\0')
-			path[j] = value[i];
-		if (value[i] == ':' || value[i + 1] == '\0')
+		if (value[i] == ':' || value[i] == '\0')
 		{
 			path[j] = '\0';
 			head = add_node(&head, path);
@@ -70,6 +69,7 @@ directory_t *_init_linked_list_path(const char *name)
 		}
 	}
 
+	free(value);
 	free(path);
 	return (head);
 }

@@ -10,6 +10,15 @@
 #include <sys/stat.h>
 #include <limits.h>
 
+#define KNRM  "\x1B[0m"
+#define KRED  "\x1B[31m"
+#define KGRN  "\x1B[32m"
+#define KYEL  "\x1B[33m"
+#define KBLU  "\x1B[34m"
+#define KMAG  "\x1B[35m"
+#define KCYN  "\x1B[36m"
+#define KWHT  "\x1B[37m"
+
 /* -------------------------------------------------- */
 
 /**
@@ -30,6 +39,7 @@ typedef struct directory_s
 extern char **environ;
 char **env_cpy;
 directory_t *head;
+char **av;
 
 /* -------------------------------------------------- */
 
@@ -37,10 +47,13 @@ directory_t *head;
 
 /* in file prompt.c */
 /* contain the main function */
-int fork_main(char **argv);
+int _prompt(char **argv);
+int fork_main(char **argv, char **av, int loop);
 int exe_func(char **argv);
 char *_stat(const char *file, directory_t *buf);
 int _change_wd(char **argv, directory_t *head);
+void whatcolor(void);
+void _error(char *av, int loop, char *command);
 
 /* functions in init.c */
 void _initialisation(void);

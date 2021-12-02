@@ -18,7 +18,7 @@ int print_list(const directory_t *head)
 		}
 		else
 		{
-			printf("[%d] value : %s\n", number_of_nodes, head->value);
+			printf("[%d] %s\n", number_of_nodes, head->value);
 		}
 		number_of_nodes++;
 		head = head->next;

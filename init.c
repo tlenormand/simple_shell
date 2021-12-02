@@ -1,7 +1,7 @@
 #include "main.h"
 
 /**
- * _init - function that initialise the main function
+ * _initialisation - function that initialise the main function
  */
 
 void _initialisation(void)
@@ -13,6 +13,7 @@ void _initialisation(void)
 
 /**
  * _close - function that close the main function
+ * @line: line gets by function getline
  */
 
 void _close(char *line)

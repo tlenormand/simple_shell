@@ -46,14 +46,19 @@ char **av;
 /* prototypes */
 
 /* in file prompt.c */
-/* contain the main function */
-int _prompt(char **argv);
-int fork_main(char **argv, char **av, int loop);
-int exe_func(char **argv);
+int _prompt(char **av);
+
+/* in file _stat.c */
 char *_stat(const char *file, directory_t *buf);
-int _change_wd(char **argv, directory_t *head);
+
+/* in file _cd.c */
+int _cd(char **argv, directory_t *head);
+
+/* in file visual.c */
 void whatcolor(void);
-void _error(char *av, int loop, char *command);
+
+/* in file _error.c */
+void _error(char *av, int nb_command, char *command);
 
 /* functions in init.c */
 void _initialisation(void);
@@ -77,10 +82,15 @@ void _free_double_pointer(char **double_ptr);
 void _add_value_double_ptr(char **double_ptr, char *value);
 char **_double_pointer_copy(char **dest, char **src);
 
-/* in file get_strtok.c */
-char **strtow(char *str);
+/* in file _strtok.c */
+char **_strtok(char *str);
 int nb_letter(int i, char *str);
 int nb_word(int i, char *str);
 
+/* in file check_access.c */
+int check_access(char **argv);
+
+/* in file fork_process.c */
+int fork_process(char **argv);
 
 #endif /* MAIN_H */

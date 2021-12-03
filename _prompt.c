@@ -12,6 +12,7 @@ int _prompt(char **av)
 	char *line = NULL;
 	int nb_command = 1;
 	char **argv = NULL;
+	int check_acc;
 
 	_initialisation();
 
@@ -31,11 +32,12 @@ int _prompt(char **av)
 
 			argv = _strtok(line);
 
-			if (check_access(argv) == 0)
+			check_acc = check_access(argv, line);
+			if (check_acc == 0)
 			{
 				fork_process(argv);
 			}
-			else if (check_access(argv) != 1)
+			else if (check_acc == -1)
 				_error(av[0], nb_command, argv[0]);
 
 			_free_double_pointer(argv);
@@ -46,6 +48,7 @@ int _prompt(char **av)
 		nb_command++;
 	}
 
+	_free_double_pointer(av);
 	_close(line);
 	return (0);
 }

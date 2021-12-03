@@ -1,3 +1,5 @@
+#include "main.h"
+
 /**
  * whatcolor - function that display the differents colors
  * Return: no return

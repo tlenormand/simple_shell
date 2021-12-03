@@ -40,7 +40,6 @@ directory_t *_init_linked_list_path(const char *name)
 	int i = 0, j = 0;
 
 	value = strcat(strcpy(value, _getenv(name)), "\0");
-	/*value = malloc(sizeof(char) * (strlen(_getenv(name)) + 1))*/
 
 	path = malloc(sizeof(char) * (strlen(value) + 1));
 	if (path == NULL)
@@ -66,7 +65,8 @@ directory_t *_init_linked_list_path(const char *name)
 				return (NULL);
 			}
 			j = 0;
-			i++;
+			if (value[i] == ':')
+				i++;
 		}
 	}
 

@@ -49,7 +49,7 @@ char **av;
 int _prompt(char **av);
 
 /* in file _stat.c */
-char *_stat(const char *file, directory_t *buf);
+char *_stat(char **argv, directory_t *buf);
 
 /* in file _cd.c */
 int _cd(char **argv, directory_t *head);
@@ -88,7 +88,7 @@ int nb_letter(int i, char *str);
 int nb_word(int i, char *str);
 
 /* in file check_access.c */
-int check_access(char **argv);
+int check_access(char **argv, char *line);
 
 /* in file fork_process.c */
 int fork_process(char **argv);

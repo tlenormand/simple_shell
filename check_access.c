@@ -7,7 +7,7 @@
  * Return: 0 if success, 1 if built-in function, -1 if not found
  */
 
-int check_access(char **argv)
+int check_access(char **argv, char *line)
 {
 	if (strcmp(argv[0], "cd") == 0)
 	{
@@ -37,6 +37,8 @@ int check_access(char **argv)
 
 	if (strcmp(argv[0], "exit") == 0)
 	{
+		if (line)
+			free(line);
 		if (argv)
 			_free_double_pointer(argv);
 		if (env_cpy)
@@ -50,8 +52,8 @@ int check_access(char **argv)
 	if (access(argv[0], F_OK) != -1)
 		;
 	/* concatenate the path + command */
-	else if (_stat(argv[0], head))
-		argv[0] = _stat(argv[0], head);
+	else if (_stat(argv, head))
+		;
 	else
 		return (-1);
 

@@ -19,11 +19,25 @@
 #define KCYN  "\x1B[36m"
 #define KWHT  "\x1B[37m"
 
+
 /* -------------------------------------------------- */
+/* STRUCTURES */
+
+/**
+ * struct line_s - Struct line_s
+ *
+ * @separator: the separators
+ * @f: the function associated
+ */
+typedef struct line_s
+{
+	char *separator;
+	int (*f)(char *line);
+} line_t;
+
 
 /**
  * struct directory_s - singly linked list
- * @name: name of the variable
  * @value: value of the variable
  * @next: points to the next node
  */
@@ -33,17 +47,18 @@ typedef struct directory_s
 	struct directory_s *next;
 } directory_t;
 
-/* -------------------------------------------------- */
 
-/* global variable */
+/* -------------------------------------------------- */
+/* GLOBAL VARIABLES */
+
 extern char **environ;
 char **env_cpy;
 directory_t *head;
 char **av;
 
-/* -------------------------------------------------- */
 
-/* prototypes */
+/* -------------------------------------------------- */
+/* PROTOTYPES */
 
 /* in file prompt.c */
 int _prompt(char **av);
@@ -88,9 +103,16 @@ int nb_letter(int i, char *str);
 int nb_word(int i, char *str);
 
 /* in file check_access.c */
-int check_access(char **argv, char *line);
+int check_access(char **argv);
 
 /* in file fork_process.c */
 int fork_process(char **argv);
+
+/* in file check_line */
+int check_line(char *line);
+int (*get_separator_func(char *line))(char *line);
+int separator_func(char *line);
+int checked_line(char *line);
+
 
 #endif /* MAIN_H */

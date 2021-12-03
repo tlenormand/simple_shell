@@ -7,7 +7,7 @@
  * Return: 0 if success, 1 if built-in function, -1 if not found
  */
 
-int check_access(char **argv, char *line)
+int check_access(char **argv)
 {
 	if (strcmp(argv[0], "cd") == 0)
 	{
@@ -34,19 +34,6 @@ int check_access(char **argv, char *line)
 	* return (1);
 	* }
 	*/
-
-	if (strcmp(argv[0], "exit") == 0)
-	{
-		if (line)
-			free(line);
-		if (argv)
-			_free_double_pointer(argv);
-		if (env_cpy)
-			_free_double_pointer(env_cpy);
-		if (head)
-			free_list(head);
-		exit(EXIT_SUCCESS);
-	}
 
 	/* we can access without the path */
 	if (access(argv[0], F_OK) != -1)

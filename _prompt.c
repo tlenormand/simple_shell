@@ -11,8 +11,7 @@ int _prompt(char **av)
 	size_t length = 0;
 	char *line = NULL;
 	int nb_command = 1;
-	char **argv = NULL;
-	int check_acc;
+	(void)av;
 
 	_initialisation();
 
@@ -25,30 +24,21 @@ int _prompt(char **av)
 		if ((getline(&line, &length, stdin)) == -1)
 			break;
 
+		/* if given exit */
+		if (strcmp(line, "exit\n") == 0)
+			break;
+
 		if (*line != '\n')
 		{
 			/* '\n' replace by '\0' */
 			line[strlen(line) - 1] = '\0';
 
-			argv = _strtok(line);
-
-			check_acc = check_access(argv, line);
-			if (check_acc == 0)
-			{
-				fork_process(argv);
-			}
-			else if (check_acc == -1)
-				_error(av[0], nb_command, argv[0]);
-
-			_free_double_pointer(argv);
-
+			check_line(line);
 		}
-		/*if (line)
-			free(line);*/
 		nb_command++;
 	}
 
-	_free_double_pointer(av);
+	printf("\n");
 	_close(line);
 	return (0);
 }

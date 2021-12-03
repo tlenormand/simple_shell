@@ -9,8 +9,40 @@
 
 int check_line(char *line)
 {
-	if (get_separator_func(line)(line) == 0)
-		checked_line(line);
+	line_t separators[] = {
+		{";", separator_func},
+		{"&&", and_if_func},
+		{"||", and_if_func},
+		{NULL, NULL}
+	};
+
+	int i = 0, j = 0, k = 0;
+
+	while (line[i] != '\0')
+	{
+		while (separators[j].separator != NULL)
+		{
+			if (separators[j].separator[k] == line[i])
+			{
+				k++;
+				if (separators[j].separator[k] == '\0')
+				{
+					return (get_separator_func(line)(line));
+				}
+				i++;
+			}
+			else
+			{
+				k = 0;
+				j++;
+			}
+		}
+		k = 0;
+		j = 0;
+		i++;
+	}
+
+	checked_line(line);
 
 	return (0);
 }
@@ -26,6 +58,8 @@ int (*get_separator_func(char *line))(char *)
 {
 	line_t separators[] = {
 		{";", separator_func},
+		{"&&", and_if_func},
+		{"||", or_if_func},
 		{NULL, NULL}
 	};
 
@@ -38,21 +72,20 @@ int (*get_separator_func(char *line))(char *)
 			if (separators[j].separator[k] == line[i])
 			{
 				k++;
+				if (separators[j].separator[k] == '\0')
+				{
+					return (separators[j].f);
+				}
 				i++;
 			}
 			else
 			{
-				if (separators[j].separator[k + 1] == '\0')
-				{
-					return (separators[i].f);
-				}
-				else
-				{
-					k = 0;
-					j++;
-				}
+				k = 0;
+				j++;
 			}
 		}
+		k = 0;
+		j = 0;
 		i++;
 	}
 
@@ -61,45 +94,10 @@ int (*get_separator_func(char *line))(char *)
 
 
 /**
- * separator_func - function pointed by get_separator_func
- * do the appropriate calculation corresponding to the separator
- * @line: line given by _getline, separated if separators are found
- * Return: 1 always
- */
-
-int separator_func(char *line)
-{
-	int i = 0, j = 0;
-	char *line_bis;
-	int len = 0;
-
-	while (line[i])
-	{
-		while (line[len] != ';' && line[len] != '\0')
-			len++;
-		line_bis = malloc(sizeof(char) * ++len);
-
-		j = 0;
-		while (line[i] != ';' && line[i] != '\0')
-		{
-			line_bis[j] = line[i];
-			i++, j++;
-		}
-		line_bis[j] = '\0';
-		i++;
-
-		checked_line(line_bis);
-	}
-
-	return (1);
-}
-
-
-/**
  * checked_line - function that directed the line
  * line has no separator in it. separators was found in get_separator_func
  * @line: line given by _getline
- * Return: 0 always
+ * Return: 0 if success, -1 otherwise
  */
 
 int checked_line(char *line)
@@ -108,15 +106,20 @@ int checked_line(char *line)
 	int check_acc;
 
 	argv = _strtok(line);
-	free(line);
 
 	check_acc = check_access(argv);
 	if (check_acc == 0)
 	{
-		fork_process(argv);
+		if (fork_process(argv) == -1)
+		{
+			return (-1);
+		}
 	}
 	else if (check_acc == -1)
-		_error("Bonjour", 1, argv[0]);
+	{
+		_error("./hsh", 1, argv[0]);
+		return (-1);
+	}
 
 	_free_double_pointer(argv);
 

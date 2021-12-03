@@ -22,7 +22,10 @@ int _prompt(char **av)
 
 		/* if given ctrl + D */
 		if ((getline(&line, &length, stdin)) == -1)
+		{
+			printf("\n");
 			break;
+		}
 
 		/* if given exit */
 		if (strcmp(line, "exit\n") == 0)
@@ -38,7 +41,6 @@ int _prompt(char **av)
 		nb_command++;
 	}
 
-	printf("\n");
 	_close(line);
 	return (0);
 }

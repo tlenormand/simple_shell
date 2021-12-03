@@ -10,6 +10,10 @@
 #include <sys/stat.h>
 #include <limits.h>
 
+
+
+#include <fcntl.h>
+
 #define KNRM  "\x1B[0m"
 #define KRED  "\x1B[31m"
 #define KGRN  "\x1B[32m"
@@ -111,8 +115,12 @@ int fork_process(char **argv);
 /* in file check_line */
 int check_line(char *line);
 int (*get_separator_func(char *line))(char *line);
-int separator_func(char *line);
 int checked_line(char *line);
+
+/* in file separators_functions.c */
+int separator_func(char *line);
+int and_if_func(char *line);
+int or_if_func(char *line);
 
 
 #endif /* MAIN_H */

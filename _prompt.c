@@ -8,19 +8,20 @@
 
 int _prompt(char **av)
 {
-	size_t length = 0;
-	char *line = NULL;
+	/*size_t length = 0;*/
+	int result = 0;
+	char *line = malloc(sizeof(char) * 120);
 	int nb_command = 1;
 
 	_initialisation();
 
 	while (1)
 	{
-		/* display '$ ' */
 		_puts_string("$ ");
+		result = _getline(line);
 
 		/* if given ctrl + D */
-		if ((getline(&line, &length, stdin)) == -1)
+		if (result == -1)
 		{
 			_putchar('\n');
 			break;

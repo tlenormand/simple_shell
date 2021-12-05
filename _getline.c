@@ -1,34 +1,50 @@
 #include "main.h"
 
-char *_getline(void) {
-    char * line = malloc(100), * linep = line;
-    size_t lenmax = 100, len = lenmax;
-    int c;
-    char *linen = NULL;
+/**
+ * _getline - function that get the user input
+ * @line: store the line gets in the char *line
+ * Return: number of characteres read
+ */
 
-    if(line == NULL)
-        return NULL;
+int _getline(char *line)
+{
+	char *linep = line, *linen = NULL;
+	size_t lenmax = 100, len = lenmax;
+	int c;
+	unsigned int count = 0;
 
-    for(;;) {
-        c = fgetc(stdin);
-        if(c == EOF)
-            break;
+	while (1)
+	{
+		signal(SIGINT, ctrl_c);
+		c = fgetc(stdin);
+		count++;
 
-        if(--len == 0) {
-            len = lenmax;
-            linen = _realloc(linep, lenmax *= 2);
+		if (c == EOF)
+			return (-1);
 
-            if(linen == NULL) {
-                free(linep);
-                return NULL;
-            }
-            line = linen + (line - linep);
-            linep = linen;
-        }
+		if (--len == 0)
+		{
+			len = lenmax;
+			linen = _realloc(linep, lenmax *= 2);
 
-        if((*line++ = c) == '\n')
-            break;
-    }
-    *line = '\0';
-    return linep;
+			if (linen == NULL)
+			{
+				free(linep);
+				return (-1);
+			}
+			line = linen + (line - linep);
+			linep = linen;
+		}
+
+		*line++ = c;
+		if (c == '\n')
+		{
+			*line = '\0';
+			break;
+		}
+	}
+
+	line = linep;
+
+	return (count);
 }

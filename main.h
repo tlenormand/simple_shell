@@ -63,6 +63,18 @@ char **av;
 /* in file prompt.c */
 int _prompt(char **av);
 
+
+
+
+int _getline(char *line);
+void ctrl_c(int i);
+
+
+
+
+
+
+
 /* in file _stat.c */
 char *_stat(char **argv, directory_t *buf);
 

@@ -69,7 +69,7 @@ int and_if_func(char *line, int nb_command, char *program)
 		if (line[idx] != '\0')
 			idx += 2;
 
-		if (checked_line(line_bis, nb_command, program) == -1)
+		if (checked_line(line_bis, nb_command, program) != 1)
 		{
 			return (-1);
 		}
@@ -120,7 +120,7 @@ int or_if_func(char *line, int nb_command, char *program)
 		if (line[idx] != '\0')
 			idx += 2;
 
-		if (checked_line(line_bis, nb_command, program) == -1)
+		if (checked_line(line_bis, nb_command, program) == 1)
 		{
 			return (-1);
 		}

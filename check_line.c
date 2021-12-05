@@ -103,16 +103,17 @@ int (*get_separator_func(char *line))(char *line, int nb_command, char *program)
 int checked_line(char *line, int nb_command, char *program)
 {
 	char **argv = NULL;
-	int check_acc;
+	int check_acc, forked;
 
 	argv = _strtok(line);
 
 	check_acc = check_access(argv);
 	if (check_acc == 0)
 	{
-		if (fork_process(argv) == -1)
+		forked = fork_process(argv);
+		if (forked == 1)
 		{
-			return (-1);
+			return (1);
 		}
 	}
 	else if (check_acc == -1)

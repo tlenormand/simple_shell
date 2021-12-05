@@ -23,7 +23,10 @@ int fork_process(char **argv)
 	{
 		/* child process */
 		if (execve(argv[0], argv, env_cpy) == -1)
+		{
 			perror("Error: execve()");
+			return(1);
+		}
 	}
 	else
 	{

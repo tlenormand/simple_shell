@@ -7,7 +7,7 @@
  * Return: 0 always
  */
 
-int check_line(char *line)
+int check_line(char *line, int nb_command, char *program)
 {
 	line_t separators[] = {
 		{";", separator_func},
@@ -27,7 +27,7 @@ int check_line(char *line)
 				k++;
 				if (separators[j].separator[k] == '\0')
 				{
-					return (get_separator_func(line)(line));
+					return (get_separator_func(line)(line, nb_command, program));
 				}
 				i++;
 			}
@@ -42,7 +42,7 @@ int check_line(char *line)
 		i++;
 	}
 
-	checked_line(line);
+	checked_line(line, nb_command, program);
 
 	return (0);
 }
@@ -54,7 +54,7 @@ int check_line(char *line)
  * Return: function to appropritate calculation, 0 if not
  */
 
-int (*get_separator_func(char *line))(char *)
+int (*get_separator_func(char *line))(char *line, int nb_command, char *program)
 {
 	line_t separators[] = {
 		{";", separator_func},
@@ -100,7 +100,7 @@ int (*get_separator_func(char *line))(char *)
  * Return: 0 if success, -1 otherwise
  */
 
-int checked_line(char *line)
+int checked_line(char *line, int nb_command, char *program)
 {
 	char **argv = NULL;
 	int check_acc;
@@ -117,7 +117,7 @@ int checked_line(char *line)
 	}
 	else if (check_acc == -1)
 	{
-		_error("./hsh", 1, argv[0]);
+		_error(program, nb_command, argv[0]);
 		return (-1);
 	}
 

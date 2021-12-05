@@ -15,16 +15,16 @@ char *_stat(char **argv, directory_t *buf)
 
 	while (buf)
 	{
-		path = malloc(sizeof(char) * (strlen(argv[0]) + strlen(buf->value) + 2));
+		path = malloc(sizeof(char) * (_strlen(argv[0]) + _strlen(buf->value) + 2));
 		if (path == NULL)
 			return (NULL);
-		path = strcat(strcat(strcpy(path, buf->value), "/"), argv[0]);
+		path = _strcat(_strcat(_strcpy(path, buf->value), "/"), argv[0]);
 
 		if (access(path, F_OK) != -1)
 		{
 			free(argv[0]);
-			argv[0] = malloc(sizeof(char) * (strlen(path) + 1));
-			argv[0] = strcpy(argv[0], path);
+			argv[0] = malloc(sizeof(char) * (_strlen(path) + 1));
+			argv[0] = _strcpy(argv[0], path);
 			free(path);
 			return (argv[0]);
 		}

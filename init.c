@@ -35,16 +35,16 @@ void _close(char *line)
 
 directory_t *_init_linked_list_path(const char *name)
 {
-	char *value = malloc(sizeof(char) * (strlen(_getenv(name)) + 1));
+	char *value = malloc(sizeof(char) * (_strlen(_getenv(name)) + 1));
 	char *path = NULL;
 	int i = 0, j = 0;
 
-	value = strcat(strcpy(value, _getenv(name)), "\0");
+	value = _strcat(_strcpy(value, _getenv(name)), "\0");
 
-	path = malloc(sizeof(char) * (strlen(value) + 1));
+	path = malloc(sizeof(char) * (_strlen(value) + 1));
 	if (path == NULL)
 	{
-		printf("Error: malloc()");
+		_puts_string("Error: malloc()");
 		return (NULL);
 	}
 
@@ -58,10 +58,10 @@ directory_t *_init_linked_list_path(const char *name)
 			path[j] = '\0';
 			head = add_node(&head, path);
 			free(path);
-			path = malloc(sizeof(char) * (strlen(value) + 1));
+			path = malloc(sizeof(char) * (_strlen(value) + 1));
 			if (path == NULL)
 			{
-				printf("Error: malloc()");
+				_puts_string("Error: malloc()");
 				return (NULL);
 			}
 			j = 0;

@@ -14,12 +14,12 @@ char **_double_pointer_copy(char **dest, char **src)
 	for (i = 0; src[i]; i++)
 		;
 
-	dest = calloc(i + 1, sizeof(char *));
+	dest = _calloc(i + 1, sizeof(char *));
 	if (dest == NULL)
 		return (NULL);
 
 	for (i = 0; src[i]; i++)
-		dest[i] = strdup(src[i]);
+		dest[i] = _strdup(src[i]);
 
 	return (dest);
 }
@@ -40,20 +40,20 @@ void _add_value_double_ptr(char **double_ptr, char *value)
 	for (i = 0; double_ptr[i]; i++)
 		;
 
-	*double_ptr = realloc(*double_ptr, sizeof(char *) * (i + 1));
+	*double_ptr = _realloc(*double_ptr, sizeof(char *) * (i + 1));
 	if (double_ptr == NULL)
 	{
 		return;
 	}
 
-	double_ptr[i] = malloc(sizeof(char) * (strlen(value) + 1));
+	double_ptr[i] = malloc(sizeof(char) * (_strlen(value) + 1));
 	if (double_ptr[i] == NULL)
 	{
 		_free_double_pointer(double_ptr);
 		return;
 	}
 
-	double_ptr[i] = strcpy(double_ptr[i], value);
+	double_ptr[i] = _strcpy(double_ptr[i], value);
 }
 
 /**

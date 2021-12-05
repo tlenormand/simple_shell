@@ -15,7 +15,7 @@ char **_strtok(char *str)
 		return (NULL);
 
 	row = nb_word(i, str);
-	argv = (char **)calloc(sizeof(char *), (nb_word(i, str) + 1));
+	argv = (char **)_calloc(sizeof(char *), (nb_word(i, str) + 1));
 	if (argv == NULL || row == 0)
 	{
 		free(argv);
@@ -27,7 +27,7 @@ char **_strtok(char *str)
 	{
 		if (str[i] != ' ')
 		{
-			argv[row] = (char *)calloc(sizeof(char), (nb_letter(i, str) + 1));
+			argv[row] = (char *)_calloc(sizeof(char), (nb_letter(i, str) + 1));
 			if (argv[row] == NULL)
 			{
 				for (idx = 0; idx <= row; idx++)

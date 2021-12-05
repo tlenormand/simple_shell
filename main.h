@@ -10,10 +10,6 @@
 #include <sys/stat.h>
 #include <limits.h>
 
-
-
-#include <fcntl.h>
-
 #define KNRM  "\x1B[0m"
 #define KRED  "\x1B[31m"
 #define KGRN  "\x1B[32m"
@@ -36,7 +32,7 @@
 typedef struct line_s
 {
 	char *separator;
-	int (*f)(char *line);
+	int (*f)(char *line, int nb_command, char *command);
 } line_t;
 
 
@@ -113,14 +109,31 @@ int check_access(char **argv);
 int fork_process(char **argv);
 
 /* in file check_line */
-int check_line(char *line);
-int (*get_separator_func(char *line))(char *line);
-int checked_line(char *line);
+int check_line(char *line, int nb_command, char *program);
+int (*get_separator_func(char *line))(char *line, int nb_command, char *program);
+int checked_line(char *line, int nb_command, char *program);
 
 /* in file separators_functions.c */
-int separator_func(char *line);
-int and_if_func(char *line);
-int or_if_func(char *line);
+int separator_func(char *line, int nb_command, char *program);
+int and_if_func(char *line, int nb_command, char *program);
+int or_if_func(char *line, int nb_command, char *program);
+
+/* in file function_str.c */
+int _strlen(char *str);
+char *_strcat(char *dest, char *src);
+char *_strdup(char *str);
+char *_strcpy(char *dest, char *src);
+int _strcmp(char *s1, char *s2);
+
+/* in file function_allocation.c */
+void *_calloc(unsigned int nmemb, unsigned int size);
+void *_realloc(void *ptr, unsigned int new_size);
+char *_memcpy(char *dest, char *src, unsigned int n);
+
+/* in file function_print.c */
+int _putchar(char c);
+int _puts_integer(int d);
+int _puts_string(char *str);
 
 
 #endif /* MAIN_H */

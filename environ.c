@@ -10,7 +10,10 @@ void _printenv(char **env)
 	int i;
 
 	for (i = 0; env[i]; i++)
-		printf("%s\n", env[i]);
+	{
+		_puts_string(env[i]);
+		_putchar('\0');
+	}
 }
 
 
@@ -78,13 +81,13 @@ int _setenv(const char *name, const char *value, int overwrite)
 		_unsetenv(name);
 
 	/* new variable | +2 for '\0' and '=' */
-	new_env = malloc(sizeof(char) * (strlen(name) + strlen(value) + 2));
+	new_env = malloc(sizeof(char) * (_strlen((char *)name) + _strlen((char *)value) + 2));
 	if (new_env == NULL)
 	{
 		return (-1);
 	}
 
-	new_env = strcat(strcat(strcpy(new_env, name), "="), value);
+	new_env = _strcat(_strcat(_strcpy(new_env, (char *)name), "="), (char *)value);
 
 	_add_value_double_ptr(env_cpy, new_env);
 

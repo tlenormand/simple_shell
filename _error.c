@@ -10,5 +10,10 @@
 
 void _error(char *av, int nb_command, char *command)
 {
-	printf("%s: %d: %s: not found\n", av, nb_command, command);
+	_puts_string(av);
+	_puts_string(": ");
+	_puts_integer(nb_command);
+	_puts_string(": ");
+	_puts_string(command);
+	_puts_string(": not found\n");
 }

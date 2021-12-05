@@ -7,7 +7,7 @@
  * Return: 1 always
  */
 
-int separator_func(char *line)
+int separator_func(char *line, int nb_command, char *program)
 {
 	int i = 0, j = 0;
 	char *line_bis;
@@ -28,7 +28,7 @@ int separator_func(char *line)
 		line_bis[j] = '\0';
 		i++;
 
-		checked_line(line_bis);
+		checked_line(line_bis, nb_command, program);
 		free(line_bis);
 	}
 
@@ -43,7 +43,7 @@ int separator_func(char *line)
  * Return: 1 if success, -1 otherwise
  */
 
-int and_if_func(char *line)
+int and_if_func(char *line, int nb_command, char *program)
 {
 	int i = 0, idx = 0;
 	char *line_bis;
@@ -54,7 +54,7 @@ int and_if_func(char *line)
 		len = 0;
 		while (line[idx] != '&' && line[idx] != '\0')
 			len++, idx++;
-		/*line_bis = calloc(sizeof(char), ++len);*/
+		/*line_bis = _calloc(sizeof(char), ++len);*/
 		line_bis = malloc(sizeof(char) * ++len);
 
 		i = 0;
@@ -69,12 +69,12 @@ int and_if_func(char *line)
 		if (line[idx] != '\0')
 			idx += 2;
 
-		if (checked_line(line_bis) == -1)
+		if (checked_line(line_bis, nb_command, program) == -1)
 		{
 			return (-1);
 		}
 
-		if (access(line_bis, F_OK) != 0)
+		if (access(line_bis, F_OK) == 0)
 		{
 			free(line_bis);
 			return (1);
@@ -94,7 +94,7 @@ int and_if_func(char *line)
  * Return: 1 if success, -1 otherwise
  */
 
-int or_if_func(char *line)
+int or_if_func(char *line, int nb_command, char *program)
 {
 	int i = 0, idx = 0;
 	char *line_bis;
@@ -105,7 +105,7 @@ int or_if_func(char *line)
 		len = 0;
 		while (line[idx] != '|' && line[idx] != '\0')
 			len++, idx++;
-		/*line_bis = calloc(sizeof(char), ++len);*/
+		/*line_bis = _calloc(sizeof(char), ++len);*/
 		line_bis = malloc(sizeof(char) * ++len);
 
 		i = 0;
@@ -120,12 +120,12 @@ int or_if_func(char *line)
 		if (line[idx] != '\0')
 			idx += 2;
 
-		if (checked_line(line_bis) == -1)
+		if (checked_line(line_bis, nb_command, program) == -1)
 		{
 			return (-1);
 		}
 
-		if (access(line_bis, F_OK) == 0)
+		if (access(line_bis, F_OK) != 0)
 		{
 			free(line_bis);
 			return (1);

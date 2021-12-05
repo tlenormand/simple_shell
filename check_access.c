@@ -9,26 +9,26 @@
 
 int check_access(char **argv)
 {
-	if (strcmp(argv[0], "cd") == 0)
+	if (_strcmp(argv[0], "cd") == 0)
 	{
 		_cd(argv, head);
 		return (1);
 	}
 
-	if (strcmp(argv[0], "whatcolor") == 0)
+	if (_strcmp(argv[0], "whatcolor") == 0)
 	{
 		whatcolor();
 		return (1);
 	}
 
-	if (strcmp(argv[0], "printlist") == 0)
+	if (_strcmp(argv[0], "printlist") == 0)
 	{
 		print_list(head);
 		return (1);
 	}
 
 	/*
-	* if (strcmp(argv[0], "env") == 0)
+	* if (_strcmp(argv[0], "env") == 0)
 	* {
 	* _printenv(env_cpy);
 	* return (1);

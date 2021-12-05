@@ -4,6 +4,8 @@
 /**
  * check_line - check if line don't have separators
  * @line: line given by _getline
+ * @nb_command: number of command previously executed
+ * @program: name of the current program
  * Return: 0 always
  */
 
@@ -54,7 +56,7 @@ int check_line(char *line, int nb_command, char *program)
  * Return: function to appropritate calculation, 0 if not
  */
 
-int (*get_separator_func(char *line))(char *line, int nb_command, char *program)
+int (*get_separator_func(char *line))(char *line, int nb_command, char *prog)
 {
 	line_t separators[] = {
 		{";", separator_func},
@@ -97,6 +99,8 @@ int (*get_separator_func(char *line))(char *line, int nb_command, char *program)
  * checked_line - function that directed the line
  * line has no separator in it. separators was found in get_separator_func
  * @line: line given by _getline
+ * @nb_command: number of command previously executed
+ * @program: name of the current program
  * Return: 0 if success, -1 otherwise
  */
 

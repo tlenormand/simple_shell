@@ -2,7 +2,7 @@
 
 /**
  * _stat - function that fin the path of a file
- * @file: file to find the path
+ * @argv: file to find the path
  * @buf: linked list of all path in environment
  * Return: path, NULL if failled or don't find
  */

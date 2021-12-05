@@ -35,7 +35,7 @@ int print_list(const directory_t *head)
 
 
 /**
- * add_node - function that adds a new node at the beginning of a directory_t list
+ * add_node - function that adds a new node at the beginning of a directory_t
  * @head: address of the first node
  * @value: new value to add in the list
  * Return: new address of the linked list, NULL if failed

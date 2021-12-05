@@ -4,6 +4,8 @@
  * separator_func - function pointed by get_separator_func
  * do the appropriate calculation corresponding to the separator
  * @line: line given by _getline, separated if separators are found
+ * @nb_command: number of command previously executed
+ * @program: name of the current program
  * Return: 1 always
  */
 
@@ -40,6 +42,8 @@ int separator_func(char *line, int nb_command, char *program)
  * and_if_func - function pointed by get_separator_func
  * do the appropriate calculation until it fail
  * @line: line given by _getline, separated if && is found
+ * @nb_command: number of command previously executed
+ * @program: name of the current program
  * Return: 1 if success, -1 otherwise
  */
 
@@ -91,6 +95,8 @@ int and_if_func(char *line, int nb_command, char *program)
  * or_if_func - function pointed by get_separator_func
  * do the appropriate calculation until it success
  * @line: line given by _getline, separated if || is found
+ * @nb_command: number of command previously executed
+ * @program: name of the current program
  * Return: 1 if success, -1 otherwise
  */
 

@@ -118,6 +118,7 @@ int checked_line(char *line, int nb_command, char *program)
 	else if (check_acc == -1)
 	{
 		_error(program, nb_command, argv[0]);
+		_free_double_pointer(argv);
 		return (-1);
 	}
 

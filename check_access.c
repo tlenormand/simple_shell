@@ -21,25 +21,25 @@ int check_access(char **argv)
 		return (1);
 	}
 
+	if (_strcmp(argv[0], "echo") == 0)
+		if (_strcmp(argv[1], "$$") == 0)
+		{
+			_puts_integer(getpid());
+			_putchar('\n');
+			return (1);
+		}
+
 	if (_strcmp(argv[0], "printlist") == 0)
 	{
 		print_list(head);
 		return (1);
 	}
 
-	/*
-	* if (_strcmp(argv[0], "env") == 0)
-	* {
-	* _printenv(env_cpy);
-	* return (1);
-	* }
-	*/
-
 	/* we can access without the path */
-	if (access(argv[0], F_OK) != -1)
+	if (_stat(argv, head))
 		;
 	/* concatenate the path + command */
-	else if (_stat(argv, head))
+	else if (access(argv[0], F_OK) != -1)
 		;
 	else
 		return (-1);

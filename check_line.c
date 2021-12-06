@@ -1,6 +1,5 @@
 #include "main.h"
 
-
 /**
  * check_line - check if line don't have separators
  * @line: line given by _getline
@@ -20,6 +19,8 @@ int check_line(char *line, int nb_command, char *program)
 
 	int i = 0, j = 0, k = 0;
 
+	check_comment(line);
+
 	while (line[i] != '\0')
 	{
 		while (separators[j].separator != NULL)
@@ -29,7 +30,7 @@ int check_line(char *line, int nb_command, char *program)
 				k++;
 				if (separators[j].separator[k] == '\0')
 				{
-					return (get_separator_func(line)(line, nb_command, program));
+					return (check_separator(line)(line, nb_command, program));
 				}
 				i++;
 			}
@@ -51,12 +52,35 @@ int check_line(char *line, int nb_command, char *program)
 
 
 /**
- * get_separator_func - check if line have a separator
+ * check_comment - check if there is a comment (#) in line
+ * @line: line to control given by _getline
+ * Return: 0 if not comment, 1 otherwise
+ */
+
+int check_comment(char *line)
+{
+	int i;
+
+	for (i = 0; line[i] != '\0' && line[i] != '#'; i++)
+		;
+
+	while (line[i])
+	{
+		line[i] = '\0';
+		return (1);
+	}
+
+	return (0);
+}
+
+
+/**
+ * check_separator - check if line have a separator
  * @line: line to control given by _getline
  * Return: function to appropritate calculation, 0 if not
  */
 
-int (*get_separator_func(char *line))(char *line, int nb_command, char *prog)
+int (*check_separator(char *line))(char *line, int nb_command, char *prog)
 {
 	line_t separators[] = {
 		{";", separator_func},
@@ -97,7 +121,7 @@ int (*get_separator_func(char *line))(char *line, int nb_command, char *prog)
 
 /**
  * checked_line - function that directed the line
- * line has no separator in it. separators was found in get_separator_func
+ * line has no separator in it. separators was found in check_separator
  * @line: line given by _getline
  * @nb_command: number of command previously executed
  * @program: name of the current program

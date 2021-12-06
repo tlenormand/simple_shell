@@ -10,22 +10,20 @@ int _prompt(char **av)
 {
 	/*size_t length = 0;*/
 	int result = 0;
-	char *line = malloc(sizeof(char) * 120);
+	char *line = malloc(sizeof(char) * 100);
 	int nb_command = 1;
 
 	_initialisation();
 
 	while (1)
 	{
-		_puts_string("$ ");
+		if (isatty(STDIN_FILENO) == 1)
+			_puts_string("$ ");
 		result = _getline(line);
 
 		/* if given ctrl + D */
 		if (result == -1)
-		{
-			_putchar('\n');
 			break;
-		}
 
 		/* if given exit */
 		if (_strcmp(line, "exit\n") == 0)
@@ -40,6 +38,9 @@ int _prompt(char **av)
 		}
 		nb_command++;
 	}
+
+	if (isatty(STDIN_FILENO) == 1 && _strcmp(line, "exit\n") != 0)
+		_putchar('\n');
 
 	_close(line);
 	return (0);

@@ -63,20 +63,14 @@ char **av;
 /* in file prompt.c */
 int _prompt(char **av);
 
-
-
-
-int _getline(char *line);
-void ctrl_c(int i);
-
-
-
-
-
-
-
 /* in file _stat.c */
 char *_stat(char **argv, directory_t *buf);
+
+/* in file _getline.c */
+int _getline(char *line);
+
+/* in file signal.c */
+void ctrl_c(int i);
 
 /* in file _cd.c */
 int _cd(char **argv, directory_t *head);
@@ -86,6 +80,7 @@ void whatcolor(void);
 
 /* in file _error.c */
 void _error(char *av, int nb_command, char *command);
+void _error_too_long(char *command);
 
 /* functions in init.c */
 void _initialisation(void);
@@ -122,8 +117,9 @@ int fork_process(char **argv);
 
 /* in file check_line */
 int check_line(char *line, int nb_command, char *program);
-int (*get_separator_func(char *line))(char *line, int nb_command, char *program);
+int (*check_separator(char *line))(char *line, int nb_command, char *program);
 int checked_line(char *line, int nb_command, char *program);
+int check_comment(char *line);
 
 /* in file separators_functions.c */
 int separator_func(char *line, int nb_command, char *program);

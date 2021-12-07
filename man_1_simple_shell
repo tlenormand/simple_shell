@@ -1,0 +1,66 @@
+.TH man 1 "05 December 2021" "simple_shell man page"
+.SH NAME
+simple_shell
+- formatted output conversion (clone of libc"'"s printf for Holberton School)
+.SH SYNOPSIS
+.B #include \(dqmain.h\(dq
+.br
+
+.BI "int _printf(const char *" format ", ...);"
+.SH DESCRIPTION
+.SS _printf
+.B Returns -1 on error
+
+.B Return length on success
+.SS The conversion specifier
+A character that specifies the type of conversion to be applied. The conversion specifiers and their meanings are:
+
+.B c
+	prints a character
+
+
+.B s
+	prints a string
+
+.B d, i
+	prints an integer
+
+
+.B b
+	prints the result in binary of an integer
+
+.B %
+	prints the ‘%’.
+
+.B o
+	print an integer in octal base.
+
+.B u
+	print an unsigned integer
+
+
+.B x
+	Prints an unsigned, lowercase hexadecimal integer.
+
+.B X
+	Prints an unsigned, uppercase hexadecimal integer.
+
+.B S
+	Print no-printable characters in hexadecimal preceded by a \(dq\\x\(dq
+
+.B p
+	Print the address
+
+.B r
+	Prints the string backwards
+
+.B R
+	Prints the character string in Rot13
+
+.SH SEE ALSO
+.BR simple_shell (1)
+.SH AUTHORS
+.br
+Thomas Lenormand
+.br
+Marion Baussart

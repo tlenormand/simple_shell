@@ -8,7 +8,25 @@
  * Return: No return.
  */
 
-void _error(char *av, int nb_command, char *command)
+int _error(char *av, int nb_command, char *command)
 {
-	printf("%s: %d: %s: not found\n", av, nb_command, command);
+	_puts_string(av);
+	_puts_string(": ");
+	_puts_integer(nb_command);
+	_puts_string(": ");
+	_puts_string(command);
+	_puts_string(": not found\n");
+	return (127);
+}
+
+/**
+ * _error_too_long - display message error if cmd is too long
+ * @command: name of the command
+ * Return: No return.
+ */
+
+void _error_too_long(char *command)
+{
+	_puts_string(command);
+	_puts_string(": File name too long");
 }

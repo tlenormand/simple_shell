@@ -8,43 +8,42 @@
 
 int _prompt(char **av)
 {
-	size_t length = 0;
-	char *line = NULL;
+	/*size_t length = 0;*/
+	int result = 0;
+	char *line = malloc(sizeof(char) * 100);
 	int nb_command = 1;
-	char **argv = NULL;
 
 	_initialisation();
 
 	while (1)
 	{
-		/* display '$ ' */
-		printf("$ ");
+		if (isatty(STDIN_FILENO) == 1)
+			_puts_string("$ ");
+		result = _getline(line);
 
 		/* if given ctrl + D */
-		if ((getline(&line, &length, stdin)) == -1)
+		if (result == -1)
+			break;
+
+		if (result == -2)
+		{
+			_error_too_long(line);
+			break;
+		}
+
+		if (_strcmp(line, "exit\n") == 0)
 			break;
 
 		if (*line != '\n')
 		{
-			/* '\n' replace by '\0' */
-			line[strlen(line) - 1] = '\0';
-
-			argv = _strtok(line);
-
-			if (check_access(argv) == 0)
-			{
-				fork_process(argv);
-			}
-			else if (check_access(argv) != 1)
-				_error(av[0], nb_command, argv[0]);
-
-			_free_double_pointer(argv);
-
+			line[_strlen(line) - 1] = '\0';
+			check_line(line, nb_command, av[0]);
 		}
-		/*if (line)
-			free(line);*/
 		nb_command++;
 	}
+
+	if (isatty(STDIN_FILENO) == 1 && _strcmp(line, "exit\n") != 0)
+		_putchar('\n');
 
 	_close(line);
 	return (0);

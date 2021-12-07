@@ -71,15 +71,13 @@ int _getline(char *line);
 
 /* in file signal.c */
 void ctrl_c(int i);
+void ctrl_d();
 
 /* in file _cd.c */
 int _cd(char **argv, directory_t *head);
 
-/* in file visual.c */
-void whatcolor(void);
-
 /* in file _error.c */
-void _error(char *av, int nb_command, char *command);
+int _error(char *av, int nb_command, char *command);
 void _error_too_long(char *command);
 
 /* functions in init.c */

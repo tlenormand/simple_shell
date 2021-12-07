@@ -15,12 +15,6 @@ int check_access(char **argv)
 		return (1);
 	}
 
-	if (_strcmp(argv[0], "whatcolor") == 0)
-	{
-		whatcolor();
-		return (1);
-	}
-
 	if (_strcmp(argv[0], "echo") == 0)
 		if (_strcmp(argv[1], "$$") == 0)
 		{

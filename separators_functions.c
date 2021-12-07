@@ -75,7 +75,6 @@ int and_if_func(char *line, int nb_command, char *program)
 
 		if (checked_line(line_bis, nb_command, program) == 0)
 		{
-			printf("\n\nreturn ini \n");
 			free(line_bis);
 			return (-1);
 		}
@@ -104,8 +103,8 @@ int and_if_func(char *line, int nb_command, char *program)
 
 int or_if_func(char *line, int nb_command, char *program)
 {
-	int i = 0, idx = 0, ter = 0;
-	char *line_bis, *line_ter;
+	int i = 0, idx = 0;
+	char *line_bis;
 	int len = 0;
 
 	while (line[idx])
@@ -128,68 +127,18 @@ int or_if_func(char *line, int nb_command, char *program)
 		if (line[idx] != '\0')
 			idx += 2;
 
-		if (checked_line(line_bis, nb_command, program) == -3)
-		{
-			printf("|| failled ?????????\n");
-			/*return (-1);*/
-		}
-
-/*		printf("linebis value : %s\n", line_bis);
-		printf("linebis : %d\n", access(line_bis, F_OK));*/
-
-
-
-
-
-		line_ter = malloc(sizeof(char) * (_strlen(line_bis) + 1));
-		line_ter = _strdup(line_bis);
-		i = idx;
-		while (line_bis[i] == ' ' && line_bis[i])
-			i++;
-		if (line_bis[i])
-		{
-			line_ter = malloc(sizeof(char) * (_strlen(line_bis) + 1));
-			line_ter = _strdup(line_bis);
-		}
-
-		while (line_ter[ter] != ' ' && line_ter[ter])
-			ter++;
-		while (line_ter[ter])
-			line_ter[ter] = '\0';
-
-		printf("line_ter : %s\n", line_ter);
-
-
-
-
-
-		if (check_access(&line_ter) == 0)
-		{
-			printf("return\n");
-			free(line_ter);
-			free(line_bis);
-			return (0);
-		}
-/*
-		if (access(line_bis, F_OK) != -1)
-			;
-
-		else if (_stat(&line_bis, head))
-			;
-		else
-			printf("no accesssssssssss\n");*/
-
-
-
-
-		/*if (access(line_bis, F_OK) != 0)
+		if (checked_line(line_bis, nb_command, program) == 0)
 		{
 			free(line_bis);
-			printf("rerturn ?????\n");
+			return (-1);
+		}
+
+		if (access(line_bis, F_OK) == 0)
+		{
+			free(line_bis);
 			return (1);
-		}*/
+		}
 
-		free(line_ter);
 		free(line_bis);
 	}
 

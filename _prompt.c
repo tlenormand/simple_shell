@@ -25,15 +25,18 @@ int _prompt(char **av)
 		if (result == -1)
 			break;
 
-		/* if given exit */
+		if (result == -2)
+		{
+			_error_too_long(line);
+			break;
+		}
+
 		if (_strcmp(line, "exit\n") == 0)
 			break;
 
 		if (*line != '\n')
 		{
-			/* '\n' replace by '\0' */
 			line[_strlen(line) - 1] = '\0';
-
 			check_line(line, nb_command, av[0]);
 		}
 		nb_command++;

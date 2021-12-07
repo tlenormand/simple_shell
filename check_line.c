@@ -141,14 +141,14 @@ int checked_line(char *line, int nb_command, char *program)
 		forked = fork_process(argv);
 		if (forked == 1)
 		{
-			return (1);
+			return (-1);
 		}
 	}
 	else if (check_acc == -1)
 	{
 		_error(program, nb_command, argv[0]);
 		_free_double_pointer(argv);
-		return (-1);
+		return (127);
 	}
 
 	_free_double_pointer(argv);

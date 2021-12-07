@@ -14,11 +14,17 @@ int print_list(const directory_t *head)
 	{
 		if (head->value == NULL)
 		{
-			printf("[%d] (nil)\n", 0);
+			_putchar('[');
+			_puts_integer(number_of_nodes);
+			_puts_string("] (nil)\n");
 		}
 		else
 		{
-			printf("[%d] %s\n", number_of_nodes, head->value);
+			_putchar('[');
+			_puts_integer(number_of_nodes);
+			_puts_string("] ");
+			_puts_string(head->value);
+			_putchar('\n');
 		}
 		number_of_nodes++;
 		head = head->next;
@@ -29,7 +35,7 @@ int print_list(const directory_t *head)
 
 
 /**
- * add_node - function that adds a new node at the beginning of a directory_t list
+ * add_node - function that adds a new node at the beginning of a directory_t
  * @head: address of the first node
  * @value: new value to add in the list
  * Return: new address of the linked list, NULL if failed
@@ -44,8 +50,8 @@ directory_t *add_node(directory_t **head, const char *value)
 	{
 		return (NULL);
 	}
-	new->value = malloc(sizeof(char) * (strlen(value) + 1));
-	new->value = strcpy(new->value, value);
+	new->value = malloc(sizeof(char) * (_strlen((char *)value) + 1));
+	new->value = _strcpy(new->value, (char *)value);
 	new->next = *head;
 	*head = new;
 
@@ -68,7 +74,7 @@ directory_t *add_node_end(directory_t **head, const char *value)
 	if (new_list == NULL)
 		return (NULL);
 
-	new_list->value = strdup(value);
+	new_list->value = _strdup((char *)value);
 
 	if (*head == NULL)
 		*head = new_list;

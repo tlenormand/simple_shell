@@ -19,11 +19,25 @@
 #define KCYN  "\x1B[36m"
 #define KWHT  "\x1B[37m"
 
+
 /* -------------------------------------------------- */
+/* STRUCTURES */
+
+/**
+ * struct line_s - Struct line_s
+ *
+ * @separator: the separators
+ * @f: the function associated
+ */
+typedef struct line_s
+{
+	char *separator;
+	int (*f)(char *line, int nb_command, char *command);
+} line_t;
+
 
 /**
  * struct directory_s - singly linked list
- * @name: name of the variable
  * @value: value of the variable
  * @next: points to the next node
  */
@@ -33,32 +47,38 @@ typedef struct directory_s
 	struct directory_s *next;
 } directory_t;
 
-/* -------------------------------------------------- */
 
-/* global variable */
+/* -------------------------------------------------- */
+/* GLOBAL VARIABLES */
+
 extern char **environ;
 char **env_cpy;
 directory_t *head;
 char **av;
 
-/* -------------------------------------------------- */
 
-/* prototypes */
+/* -------------------------------------------------- */
+/* PROTOTYPES */
 
 /* in file prompt.c */
 int _prompt(char **av);
 
 /* in file _stat.c */
-char *_stat(const char *file, directory_t *buf);
+char *_stat(char **argv, directory_t *buf);
+
+/* in file _getline.c */
+int _getline(char *line);
+
+/* in file signal.c */
+void ctrl_c(int i);
+void ctrl_d();
 
 /* in file _cd.c */
 int _cd(char **argv, directory_t *head);
 
-/* in file visual.c */
-void whatcolor(void);
-
 /* in file _error.c */
-void _error(char *av, int nb_command, char *command);
+int _error(char *av, int nb_command, char *command);
+void _error_too_long(char *command);
 
 /* functions in init.c */
 void _initialisation(void);
@@ -92,5 +112,34 @@ int check_access(char **argv);
 
 /* in file fork_process.c */
 int fork_process(char **argv);
+
+/* in file check_line */
+int check_line(char *line, int nb_command, char *program);
+int (*check_separator(char *line))(char *line, int nb_command, char *program);
+int checked_line(char *line, int nb_command, char *program);
+int check_comment(char *line);
+
+/* in file separators_functions.c */
+int separator_func(char *line, int nb_command, char *program);
+int and_if_func(char *line, int nb_command, char *program);
+int or_if_func(char *line, int nb_command, char *program);
+
+/* in file function_str.c */
+int _strlen(char *str);
+char *_strcat(char *dest, char *src);
+char *_strdup(char *str);
+char *_strcpy(char *dest, char *src);
+int _strcmp(char *s1, char *s2);
+
+/* in file function_allocation.c */
+void *_calloc(unsigned int nmemb, unsigned int size);
+void *_realloc(void *ptr, unsigned int new_size);
+char *_memcpy(char *dest, char *src, unsigned int n);
+
+/* in file function_print.c */
+int _putchar(char c);
+int _puts_integer(int d);
+int _puts_string(char *str);
+
 
 #endif /* MAIN_H */

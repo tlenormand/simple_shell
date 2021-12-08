@@ -63,11 +63,25 @@ char **av;
 /* in file prompt.c */
 int _prompt(char **av);
 
-/* in file _stat.c */
-char *_stat(char **argv, directory_t *buf);
-
 /* in file _getline.c */
 int _getline(char *line);
+
+/* in file check_line */
+int check_line(char *line, int nb_command, char *program);
+int (*check_separator(char *line))(char *line, int nb_command, char *program);
+int checked_line(char *line, int nb_command, char *program);
+int check_comment(char *line);
+
+/* in file check_access.c */
+int check_access(char **argv);
+int check_access2(char **argv);
+
+/* in file fork_process.c */
+int fork_process(char **argv);
+
+
+/* in file _stat.c */
+char *_stat(char **argv, directory_t *buf);
 
 /* in file signal.c */
 void ctrl_c(int i);
@@ -106,19 +120,6 @@ char **_double_pointer_copy(char **dest, char **src);
 char **_strtok(char *str);
 int nb_letter(int i, char *str);
 int nb_word(int i, char *str);
-
-/* in file check_access.c */
-int check_access(char **argv);
-int check_access2(char **argv);
-
-/* in file fork_process.c */
-int fork_process(char **argv);
-
-/* in file check_line */
-int check_line(char *line, int nb_command, char *program);
-int (*check_separator(char *line))(char *line, int nb_command, char *program);
-int checked_line(char *line, int nb_command, char *program);
-int check_comment(char *line);
 
 /* in file separators_functions.c */
 int separator_func(char *line, int nb_command, char *program);

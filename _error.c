@@ -47,4 +47,5 @@ void _error_separator(char *av, int nb_command, char *command)
 	write(STDERR_FILENO, ": Syntax error: \"", 17);
 	write(STDERR_FILENO, command, 1);
 	write(STDERR_FILENO, "\" unexpected\n", 13);
+	exit(2);
 }

@@ -15,8 +15,14 @@ int separator_func(char *line, int nb_command, char *program)
 	char *line_bis;
 	int len = 0;
 
+	while (line[i] == ' ' && line[i])
+		line = &line[i + 1];
+
+	i = 0;
 	while (line[i])
 	{
+		if (line[i] == ';')
+			return(-1);
 		while (line[len] != ';' && line[len] != '\0')
 			len++;
 		line_bis = malloc(sizeof(char) * ++len);

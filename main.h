@@ -93,6 +93,7 @@ int _cd(char **argv, directory_t *head);
 /* in file _error.c */
 void _error(char *av, int nb_command, char *command);
 void _error_too_long(char *command);
+void _error_separator(char *av, int nb_command, char *command);
 
 /* functions in init.c */
 void _initialisation(void);

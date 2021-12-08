@@ -36,6 +36,6 @@ void _help(char **argv)
 		_puts_string(argv[1]);
 		_puts_string(": not found, ");
 	}
-	_puts_string("\nwrite ‘man ./man_1_simple_shell’ ")
+	_puts_string("\nwrite ‘man ./man_1_simple_shell’ ");
 	_puts_string("for more informations\n");
 }

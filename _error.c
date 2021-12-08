@@ -16,6 +16,7 @@ void _error(char *av, int nb_command, char *command)
 	write(STDERR_FILENO, ": ", 2);
 	write(STDERR_FILENO, command, _strlen(command));
 	write(STDERR_FILENO, ": not found\n", 12);
+	exit_var = 127;
 }
 
 /**
@@ -47,4 +48,5 @@ void _error_separator(char *av, int nb_command, char *command)
 	write(STDERR_FILENO, ": Syntax error: \"", 17);
 	write(STDERR_FILENO, command, 1);
 	write(STDERR_FILENO, "\" unexpected\n", 13);
+	exit_var = 2;
 }

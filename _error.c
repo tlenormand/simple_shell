@@ -31,6 +31,13 @@ void _error_too_long(char *command)
 }
 
 
+/**
+ * _error_separator - display message error if not before ;
+ * @av: name of the program in the main
+ * @nb_command: number of the command which was typing
+ * @command: name of the command
+ * Return: No return.
+ */
 
 void _error_separator(char *av, int nb_command, char *command)
 {

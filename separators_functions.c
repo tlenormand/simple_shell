@@ -22,7 +22,7 @@ int separator_func(char *line, int nb_command, char *program)
 	while (line[i])
 	{
 		if (line[i] == ';')
-			return(-1);
+			return (-1);
 		while (line[len] != ';' && line[len] != '\0')
 			len++;
 		line_bis = malloc(sizeof(char) * ++len);

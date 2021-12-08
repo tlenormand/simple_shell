@@ -47,5 +47,5 @@ int _prompt(char **av)
 		_putchar('\n');
 
 	_close(line);
-	return (0);
+	return (exit_var);
 }

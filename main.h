@@ -55,6 +55,7 @@ extern char **environ;
 char **env_cpy;
 directory_t *head;
 char **av;
+int exit_var;
 
 
 /* -------------------------------------------------- */

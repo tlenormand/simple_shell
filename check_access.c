@@ -9,6 +9,14 @@
 
 int check_access(char **argv)
 {
+	if (_strcmp(argv[0], "echo") == 0)
+		if (_strcmp(argv[1], "$?") == 0)
+		{
+			_puts_integer(exit_var);
+			_putchar('\n');
+			return (1);
+		}
+
 	if (_strcmp(argv[0], "cd") == 0)
 	{
 		_cd(argv, head);

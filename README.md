@@ -65,7 +65,7 @@ Recode the shell. Project realised with Thomas LENORMAND and Marion BAUSSART
 
 <ul>
 <li>Allowed editors: <code>vi</code>, <code>vim</code>, <code>emacs</code></li>
-<li>All your files will be compiled on Ubuntu 20.04 LTS using <code>gcc</code>, using the options <code>-Wall -Werror -Wextra -pedantic -std=gnu89</code></li>
+<li>All your files will be compiled on Ubuntu 20.04 LTS using <code>gcc</code>, using the options <code>gcc -Wall -Werror -Wextra -pedantic -std=gnu89 *.c main.h -o shell</code></li>
 <li>All your files should end with a new line</li>
 <li>A <code>README.md</code> file, at the root of the folder of the project is mandatory</li>
 <li>Your code should use the <code>Betty</code> style. It will be checked using <a href="https://github.com/holbertonschool/Betty/blob/master/betty-style.pl" title="betty-style.pl" target="_blank">betty-style.pl</a> and <a href="https://github.com/holbertonschool/Betty/blob/master/betty-doc.pl" title="betty-doc.pl" target="_blank">betty-doc.pl</a></li>

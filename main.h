@@ -146,6 +146,7 @@ int _puts_integer_error(int d);
 
 /* in file _help */
 void _help(char **argv);
+void _help_builtin(char **argv);
 
 
 #endif /* MAIN_H */

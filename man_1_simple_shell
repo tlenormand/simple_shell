@@ -75,6 +75,24 @@ change work directory
 	cd - : go $OLDPWD defined in env
 .br
 
+.B setenv
+.br
+Usage: setenv [variable] [value]
+.br
+Add a new env variable
+.br
+
+.B unsetenv
+.br
+Usage: unsetenv [variable]
+.br
+Remove an env variable
+.br
+
+.B env
+.br
+Print the environment
+.br
 
 .B echo
 .br

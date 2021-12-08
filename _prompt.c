@@ -34,10 +34,11 @@ int _prompt(char **av)
 		if (_strcmp(line, "exit\n") == 0)
 			break;
 
-		if (*line != '\n' && *line != '#' && *line != ';')
+		if (*line != '\n' && *line != '#')
 		{
 			line[_strlen(line) - 1] = '\0';
-			check_line(line, nb_command, av[0]);
+			if (check_line(line, nb_command, av[0]) == -1)
+				_error_separator(av[0], nb_command, ";");
 		}
 		nb_command++;
 	}

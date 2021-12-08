@@ -11,8 +11,11 @@ void _printenv(char **env)
 
 	for (i = 0; env[i]; i++)
 	{
-		_puts_string(env[i]);
-		_putchar('\0');
+		if (env[i][0] != '\0')
+		{
+			_puts_string(env[i]);
+			_putchar('\n');
+		}
 	}
 }
 

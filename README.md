@@ -179,7 +179,7 @@ $
 
 <h3>Checks</h3>
 
-<p>The Checker will be released at the end of the project (1-2 days before the deadline). 
+<p>The Checker will be released at the end of the project (1-2 days before the deadline).
 We <strong>strongly</strong> encourage the entire class to work together to create a suite of checks covering both regular tests and edge cases for each task. See task <code>8. Test suite</code>.</p>
 
 </div>
@@ -231,7 +231,7 @@ We <strong>strongly</strong> encourage the entire class to work together to crea
 <li>handle commands with arguments</li>
 </ul>
 
-<pre><code>julien@ubuntu:~/shell$ ./shell 
+<pre><code>julien@ubuntu:~/shell$ ./shell
 #cisfun$ ls
 ./shell: No such file or directory
 #cisfun$ /bin/ls
@@ -280,7 +280,7 @@ env-environ.c  exec    fork    mypid   ppid   printenv  promptc  shell     shell
 :) ls
 barbie_j       env-main.c  exec.c  fork.c  pid.c  ppid.c    prompt   prompt.c  shell_0.3  stat    test_scripting.sh  wait.c
 env-environ.c  exec    fork    mypid   ppid   printenv  promptc  shell     shell.c    stat.c  wait
-:) ls -l /tmp 
+:) ls -l /tmp
 total 20
 -rw------- 1 julien julien    0 Dec  5 12:09 config-err-aAMZrR
 drwx------ 3 root   root   4096 Dec  5 12:09 systemd-private-062a0eca7f2a44349733e78cb4abdff4-colord.service-V7DUzr
@@ -288,7 +288,7 @@ drwx------ 3 root   root   4096 Dec  5 12:09 systemd-private-062a0eca7f2a4434973
 drwx------ 3 root   root   4096 Dec  5 12:07 systemd-private-062a0eca7f2a44349733e78cb4abdff4-systemd-timesyncd.service-CdXUtH
 -rw-rw-r-- 1 julien julien    0 Dec  5 12:09 unity_support_test.0
 :) ^C
-julien@ubuntu:~/shell$ 
+julien@ubuntu:~/shell$
 </code></pre>
 
 <br></br>
@@ -328,7 +328,7 @@ TERM=xterm-256color
 PATH=/home/julien/bin:/home/julien/.local/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/snap/bin
 DISPLAY=:0
 $ exit
-julien@ubuntu:~/shell$ 
+julien@ubuntu:~/shell$
 </code></pre>
 
 <br></br>
@@ -428,7 +428,7 @@ You should merge your previous knowledge of the shell with the specifics of how 
 $ exit 98
 julien@ubuntu:~/shell$ echo $?
 98
-julien@ubuntu:~/shell$ 
+julien@ubuntu:~/shell$
 </code></pre>
 
 <br></br>
@@ -453,7 +453,7 @@ $ ^C
 $ ^C
 $ ^C
 $ exit
-julien@ubuntu:~/shell$ 
+julien@ubuntu:~/shell$
 </code></pre>
 
 <br></br>
@@ -608,8 +608,8 @@ $ echo $$
 5104
 $ echo $PATH
 /home/julien/bin:/home/julien/.local/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/snap/bin
-$ exit 
-julien@ubuntu:~/shell$ 
+$ exit
+julien@ubuntu:~/shell$
 </code></pre>
 
 <br></br>
@@ -624,7 +624,7 @@ julien@ubuntu:~/shell$
 $ echo $$ # ls -la
 5114
 $ exit
-julien@ubuntu:~/shell$ 
+julien@ubuntu:~/shell$
 </code></pre>
 
 <br></br>

@@ -8,15 +8,14 @@
  * Return: No return.
  */
 
-int _error(char *av, int nb_command, char *command)
+void _error(char *av, int nb_command, char *command)
 {
-	_puts_string(av);
-	_puts_string(": ");
-	_puts_integer(nb_command);
-	_puts_string(": ");
-	_puts_string(command);
-	_puts_string(": not found\n");
-	return (127);
+	write(STDERR_FILENO, av, _strlen(av));
+	write(STDERR_FILENO, ": ", 2);
+	_puts_integer_error(nb_command);
+	write(STDERR_FILENO, ": ", 2);
+	write(STDERR_FILENO, command, _strlen(command));
+	write(STDERR_FILENO, ": not found\n", 12);
 }
 
 /**

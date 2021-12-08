@@ -71,13 +71,13 @@ int _getline(char *line);
 
 /* in file signal.c */
 void ctrl_c(int i);
-void ctrl_d();
+void ctrl_d(void);
 
 /* in file _cd.c */
 int _cd(char **argv, directory_t *head);
 
 /* in file _error.c */
-int _error(char *av, int nb_command, char *command);
+void _error(char *av, int nb_command, char *command);
 void _error_too_long(char *command);
 
 /* functions in init.c */
@@ -109,6 +109,7 @@ int nb_word(int i, char *str);
 
 /* in file check_access.c */
 int check_access(char **argv);
+int check_access2(char **argv);
 
 /* in file fork_process.c */
 int fork_process(char **argv);
@@ -140,6 +141,11 @@ char *_memcpy(char *dest, char *src, unsigned int n);
 int _putchar(char c);
 int _puts_integer(int d);
 int _puts_string(char *str);
+int _putchar_error(char c);
+int _puts_integer_error(int d);
+
+/* in file _help */
+void _help(char **argv);
 
 
 #endif /* MAIN_H */

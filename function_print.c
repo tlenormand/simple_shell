@@ -77,3 +77,62 @@ int _puts_string(char *str)
 
 	return (lenght);
 }
+
+
+/**
+ * _putchar_error - writes the character c to STDERR
+ * @c: the character to print
+ * Return: 1 on success, -1 on error
+ */
+
+int _putchar_error(char c)
+{
+	return (write(2, &c, 1));
+}
+
+
+/**
+ * _puts_integer_error - print integer on STDERR
+ * @d: integer to print
+ * Return: lenght of character printed
+ */
+
+int _puts_integer_error(int d)
+{
+	int lenght = 0;
+	unsigned int i = 0;
+	unsigned int number_in_n;
+	unsigned int j = 1;
+
+	if (d == 0)
+	{
+		_putchar_error('0');
+		lenght++;
+	}
+	else
+	{
+		if (d < 0)
+		{
+			_putchar_error('-'), d = d * (-1);
+			lenght++;
+		}
+		number_in_n = d;
+		while (number_in_n > 0)
+		{
+			i++;
+			number_in_n = number_in_n / 10;
+		}
+		while (i > 1)
+		{
+			j = j * 10;
+			i--;
+		}
+		while (j > 0)
+		{
+			_putchar_error((d / j) % 10 + '0');
+			lenght++;
+			j = j / 10;
+		}
+	}
+	return (lenght);
+}

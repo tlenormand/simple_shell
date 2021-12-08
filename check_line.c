@@ -13,7 +13,7 @@ int check_line(char *line, int nb_command, char *program)
 	line_t separators[] = {
 		{";", separator_func},
 		{"&&", and_if_func},
-		{"||", and_if_func},
+		{"||", or_if_func},
 		{NULL, NULL}
 	};
 

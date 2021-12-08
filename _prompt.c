@@ -34,7 +34,7 @@ int _prompt(char **av)
 		if (_strcmp(line, "exit\n") == 0)
 			break;
 
-		if (*line != '\n')
+		if (*line != '\n' && *line != '#')
 		{
 			line[_strlen(line) - 1] = '\0';
 			check_line(line, nb_command, av[0]);

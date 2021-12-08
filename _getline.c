@@ -19,11 +19,11 @@ int _getline(char *line)
 		if (read(STDIN_FILENO, &c, 1) != -1)
 		{
 			count++;
+
 			if (--len == 0)
 			{
 				len = lenmax;
 				linen = _realloc(linep, lenmax *= 2);
-
 				if (linen == NULL)
 				{
 					free(linep);
@@ -32,7 +32,6 @@ int _getline(char *line)
 				line = linen + (line - linep);
 				linep = linen;
 			}
-
 			*line++ = c;
 			if (c == '\n')
 			{
@@ -47,5 +46,6 @@ int _getline(char *line)
 	}
 
 	line = linep;
+
 	return (count);
 }

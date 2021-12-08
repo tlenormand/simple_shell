@@ -62,7 +62,10 @@ int check_comment(char *line)
 	int i;
 
 	for (i = 0; line[i] != '\0' && line[i] != '#'; i++)
-		;
+		if (line[i - 1] == ' ')
+		{
+			i++;
+		}
 
 	while (line[i])
 	{
@@ -148,7 +151,7 @@ int checked_line(char *line, int nb_command, char *program)
 	{
 		_error(program, nb_command, argv[0]);
 		_free_double_pointer(argv);
-		return (127);
+		return (-1);
 	}
 
 	_free_double_pointer(argv);
